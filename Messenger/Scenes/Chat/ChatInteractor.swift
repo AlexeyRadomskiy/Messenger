@@ -20,13 +20,14 @@ class ChatInteractor: ChatInteractorProtocol {
 	var messages: [String] = []
 	var imageData: Data?
 	var localMessagesCount: Int {
-		let localMessages = UserDefaults.standard.object(forKey: "Local Messages") as? [String]
+		let localMessages = userDefaults.object(forKey: "Local Messages") as? [String]
 		
 		return localMessages?.count ?? 0
 	}
 	
 	private let chatService: ChatService = ChatServiceImp()
 	private let imageService: ImageService = ImageServiceImp()
+	private var userDefaults = UserDefaults.standard
 	
 	private var isInitialLoading = false
 	private var offset = 0
@@ -40,25 +41,18 @@ class ChatInteractor: ChatInteractorProtocol {
 				self.offset += 20
 				model.result.forEach { self.messages.append($0) }
 				
-				DispatchQueue.main.async {
-					if self.isInitialLoading {
-						self.presenter.messagesDidReceived(isScrollToBottom: false)
-					} else {
-						let localMessages = UserDefaults.standard.object(forKey: "Local Messages") as? [String]
-						localMessages?.forEach { self.messages.insert($0, at: 0) }
-						self.presenter.messagesDidReceived(isScrollToBottom: true)
-						self.isInitialLoading = true
-					}
+				if self.isInitialLoading {
+					self.presenter.messagesDidReceived(isScrollToBottom: false)
+				} else {
+					let localMessages = self.userDefaults.object(forKey: "Local Messages") as? [String]
+					localMessages?.forEach { self.messages.insert($0, at: 0) }
+					self.presenter.messagesDidReceived(isScrollToBottom: true)
+					self.isInitialLoading = true
 				}
 			case .failure(let error):
 				print(error.localizedDescription)
 				
-				DispatchQueue.main.async {
-					self.presenter.getError()
-					if self.offset > 20 {
-						self.offset -= 20
-					}
-				}
+				self.presenter.getError()
 			}
 		}
 	}
@@ -67,16 +61,12 @@ class ChatInteractor: ChatInteractorProtocol {
 		imageService.fetchData { result in
 			switch result {
 			case .success(let data):
-				DispatchQueue.main.async {
-					self.imageData = data
-					self.presenter.messagesDidReceived(isScrollToBottom: false)
-				}
+				self.imageData = data
+				self.presenter.messagesDidReceived(isScrollToBottom: false)
 			case .failure(let error):
 				print(error.localizedDescription)
 				
-				DispatchQueue.main.async {
-					self.presenter.getError()
-				}
+				self.presenter.getError()
 			}
 		}
 	}
@@ -86,9 +76,11 @@ class ChatInteractor: ChatInteractorProtocol {
 	}
 	
 	func updateMessages(with text: String) {
-		if var localMessages = UserDefaults.standard.object(forKey: "Local Messages") as? [String] {
+		if var localMessages = userDefaults.object(forKey: "Local Messages") as? [String] {
 			localMessages.append(text)
-			UserDefaults.standard.set(localMessages, forKey: "Local Messages")
+			userDefaults.set(localMessages, forKey: "Local Messages")
+		} else {
+			userDefaults.set([text], forKey: "Local Messages")
 		}
 		
 		messages.insert(text, at: 0)

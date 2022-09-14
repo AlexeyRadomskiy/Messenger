@@ -18,12 +18,18 @@ class NetworkManagerImp: NetworkManager {
 		completion: @escaping(Result<Data, NetworkError>) -> Void
 	) {
 		guard let url = URL(string: endpoint.baseURL + endpoint.url) else {
-			completion(.failure(.invalidURL))
+			DispatchQueue.main.async {
+				completion(.failure(.invalidURL))
+			}
+			
 			return
 		}
 		DispatchQueue.global().async {
 			guard let imageData = try? Data(contentsOf: url) else {
-				completion(.failure(.noData))
+				DispatchQueue.main.async {
+					completion(.failure(.noData))
+				}
+				
 				return
 			}
 			DispatchQueue.main.async {
@@ -37,7 +43,10 @@ class NetworkManagerImp: NetworkManager {
 		completion: @escaping(Result<MessageModel, NetworkError>) -> Void
 	) {
 		guard let url = URL(string: endpoint.baseURL + endpoint.url) else {
-			completion(.failure(.invalidURL))
+			DispatchQueue.main.async {
+				completion(.failure(.invalidURL))
+			}
+			
 			return
 		}
 		
@@ -55,7 +64,9 @@ class NetworkManagerImp: NetworkManager {
 					completion(.success(type))
 				}
 			} catch {
-				completion(.failure(.decodingError))
+				DispatchQueue.main.async {
+					completion(.failure(.decodingError))
+				}
 			}
 		}.resume()
 	}

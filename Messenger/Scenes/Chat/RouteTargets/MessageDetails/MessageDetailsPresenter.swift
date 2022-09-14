@@ -27,7 +27,11 @@ class MessageDetailsPresenter {
     
     // MARK: - Init
     
-    init(view: MessageDetailsViewProtocol, interactor: MessageDetailsInteractorProtocol, router: MessageDetailsRouterProtocol) {        
+    init(
+		view: MessageDetailsViewProtocol,
+		interactor: MessageDetailsInteractorProtocol,
+		router: MessageDetailsRouterProtocol
+	) {        
         self.view = view
         self.interactor = interactor
         self.router = router

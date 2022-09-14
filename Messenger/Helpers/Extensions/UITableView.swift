@@ -27,7 +27,10 @@ extension UITableView {
 	}
 	
 	func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
-		guard let cell = dequeueReusableCell(withIdentifier: T.reusableId, for: indexPath) as? T else {
+		guard let cell = dequeueReusableCell(
+			withIdentifier: T.reusableId,
+			for: indexPath
+		) as? T else {
 			fatalError("Could not dequeue cell with identifier: \(T.reusableId)")
 		}
 		
@@ -39,7 +42,9 @@ extension UITableView {
 	}
 	
 	func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>() -> T {
-		guard let headerOrFooter = dequeueReusableHeaderFooterView(withIdentifier: T.reusableId) as? T else {
+		guard let headerOrFooter = dequeueReusableHeaderFooterView(
+			withIdentifier: T.reusableId
+		) as? T else {
 			fatalError("Could not dequeue headerOrFooter with identifier: \(T.reusableId)")
 		}
 		

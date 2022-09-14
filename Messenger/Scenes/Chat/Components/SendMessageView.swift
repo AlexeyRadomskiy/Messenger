@@ -2,7 +2,7 @@ import UIKit
 
 final class SendMessageView: UIView {
 	
-	// MARK: - Properies
+	// MARK: - Properties
 	
 	private let textView: UITextView = {
 		let textView = UITextView()
@@ -39,10 +39,10 @@ final class SendMessageView: UIView {
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		
-		configureAppearance()
-		addActions()
 		embedSubviews()
 		setSubviewsConstraints()
+		addActions()
+		configureAppearance()
 	}
 	
 	required init?(coder: NSCoder) {
@@ -124,11 +124,16 @@ extension SendMessageView: UITextViewDelegate {
 	
 }
 
+// MARK: - Private Methods
+
 extension SendMessageView {
 	
 	private func configureSendButton() {
 		let color = textView.text.isEmpty ? UIColor.systemGray : UIColor.systemBlue
-		sendButton.setTitleColor(color, for: .normal)
+		sendButton.setAttr(
+			text: R.Strings.sendButtonTitle,
+			normal: color
+		)
 		sendButton.isEnabled = !textView.text.isEmpty
 	}
 	

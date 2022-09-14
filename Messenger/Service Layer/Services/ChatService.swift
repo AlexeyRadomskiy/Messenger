@@ -1,7 +1,10 @@
 import Foundation
 
 protocol ChatService {
-	func fetchData(with offset: Int, _ completion: @escaping (Result<MessageModel, NetworkError>) -> Void)
+	func fetchData(
+		with offset: Int,
+		_ completion: @escaping (Result<MessageModel, NetworkError>) -> Void
+	)
 }
 
 // MARK: - Implementation
@@ -20,7 +23,10 @@ struct ChatServiceImp: ChatService {
 	
 	// MARK: - Methods
 	
-	func fetchData(with offset: Int, _ completion: @escaping (Result<MessageModel, NetworkError>) -> Void) {
+	func fetchData(
+		with offset: Int,
+		_ completion: @escaping (Result<MessageModel, NetworkError>) -> Void
+	) {
 		networkManager.fetch(with: MainEndpoint.chatData(offset: offset)) { result in
 			completion(result)
 		}

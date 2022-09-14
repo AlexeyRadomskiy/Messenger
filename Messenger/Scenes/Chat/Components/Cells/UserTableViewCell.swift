@@ -2,12 +2,12 @@ import UIKit
 
 final class UserTableViewCell: BaseTableViewCell {
 	
-	// MARK: - Properies
+	// MARK: - Properties
 	
 	private let userView: UIImageView = {
 		let imageView = UIImageView()
 		imageView.roundCorners(radius: 16.0)
-		imageView.backgroundColor = .red
+		imageView.backgroundColor = .tertiarySystemFill
 		
 		return imageView
 	}()

@@ -249,12 +249,36 @@
 		6CF1A10228D1DCDB008B5BDD /* Service Layer */ = {
 			isa = PBXGroup;
 			children = (
-				6CF1A12F28D1EDD5008B5BDD /* NetworkManager.swift */,
-				6CF1A11828D1EB5C008B5BDD /* ChatService.swift */,
-				6CF1A13428D1F4FE008B5BDD /* ImageService.swift */,
-				6CF1A12C28D1EBC1008B5BDD /* Endpoint.swift */,
+				6CF1A13928D21BCF008B5BDD /* Managers */,
+				6CF1A13A28D21BDB008B5BDD /* Endpoints */,
+				6CF1A13828D21BC8008B5BDD /* Services */,
 			);
 			path = "Service Layer";
+			sourceTree = "<group>";
+		};
+		6CF1A13828D21BC8008B5BDD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				6CF1A11828D1EB5C008B5BDD /* ChatService.swift */,
+				6CF1A13428D1F4FE008B5BDD /* ImageService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6CF1A13928D21BCF008B5BDD /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				6CF1A12F28D1EDD5008B5BDD /* NetworkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		6CF1A13A28D21BDB008B5BDD /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				6CF1A12C28D1EBC1008B5BDD /* Endpoint.swift */,
+			);
+			path = Endpoints;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

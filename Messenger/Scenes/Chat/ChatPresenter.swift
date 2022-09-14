@@ -33,7 +33,11 @@ class ChatPresenter {
     
     // MARK: - Init
     
-    init(view: ChatViewProtocol, interactor: ChatInteractorProtocol, router: ChatRouterProtocol) {        
+    init(
+		view: ChatViewProtocol,
+		interactor: ChatInteractorProtocol,
+		router: ChatRouterProtocol
+	) {        
         self.view = view
         self.interactor = interactor
         self.router = router

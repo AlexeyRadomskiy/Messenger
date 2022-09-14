@@ -187,7 +187,11 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
 		return cell
 	}
 	
-	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+	func tableView(
+		_ tableView: UITableView,
+		willDisplay cell: UITableViewCell,
+		forRowAt indexPath: IndexPath
+	) {
 		if indexPath.row == presenter.messages.count - 5 {
 			presenter.downloadMessages()
 		}
@@ -259,7 +263,10 @@ extension ChatViewController: UIGestureRecognizerDelegate {
 		return navigationController?.viewControllers.count ?? 0 > 1
 	}
 	
-	func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+	func gestureRecognizer(
+		_ gestureRecognizer: UIGestureRecognizer,
+		shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer
+	) -> Bool {
 		
 		return true
 	}
@@ -270,13 +277,31 @@ extension ChatViewController: UIGestureRecognizerDelegate {
 extension ChatViewController {
 	
 	private func registerForKeyboardNotifications() {
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+		NotificationCenter.default.addObserver(
+			self,
+			selector: #selector(keyboardWillShow),
+			name: UIResponder.keyboardWillShowNotification,
+			object: nil
+		)
+		NotificationCenter.default.addObserver(
+			self,
+			selector: #selector(keyboardWillHide),
+			name: UIResponder.keyboardWillHideNotification,
+			object: nil
+		)
 	}
 	
 	private func removeKeyboardNotifications() {
-		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+		NotificationCenter.default.removeObserver(
+			self,
+			name: UIResponder.keyboardWillShowNotification,
+			object: nil
+		)
+		NotificationCenter.default.removeObserver(
+			self,
+			name: UIResponder.keyboardWillHideNotification,
+			object: nil
+		)
 	}
 	
 	@objc private func keyboardWillShow(_ notification: Notification) {

@@ -38,7 +38,10 @@ public final class ClosureContainer<T: Closurable> {
 
 extension UIControl: Closurable {
 	
-	public func addTarget(for event: UIControl.Event = .touchUpInside, closure: @escaping (UIControl) -> ()) {
+	public func addTarget(
+		for event: UIControl.Event = .touchUpInside,
+		closure: @escaping (UIControl) -> ()
+	) {
 		let container = getContainer(for: closure)
 		addTarget(container, action: container.action, for: event)
 	}

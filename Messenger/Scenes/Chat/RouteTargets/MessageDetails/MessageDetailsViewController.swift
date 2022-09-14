@@ -14,7 +14,7 @@ class MessageDetailsViewController: BaseViewController {
 	
 	private let userView: UIImageView = {
 		let imageView = UIImageView()
-		imageView.backgroundColor = .red
+		imageView.backgroundColor = .tertiarySystemFill
 		imageView.alpha = 0.0
 		
 		return imageView

@@ -15,7 +15,10 @@ class BaseRouter {
     // MARK: - Methods
     
     func push(_ viewController: UIViewController, animated: Bool = true) {
-        self.viewController.navigationController?.pushViewController(viewController, animated: animated)
+        self.viewController.navigationController?.pushViewController(
+			viewController,
+			animated: animated
+		)
     }
 	
 	func pop(_ animated: Bool = true) {
@@ -26,8 +29,16 @@ class BaseRouter {
 		self.viewController.presentingViewController?.navigationController?.pushViewController(viewController, animated: animated)
 	}
     
-    func present(_ viewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
-        self.viewController.present(viewController, animated: animated, completion: completion)
+    func present(
+		_ viewController: UIViewController,
+		animated: Bool = true,
+		completion: (() -> Void)? = nil
+	) {
+        self.viewController.present(
+			viewController,
+			animated: animated,
+			completion: completion
+		)
     }
     
     func show(_ viewController: UIViewController, sender: Any? = nil) {
