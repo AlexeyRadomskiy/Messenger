@@ -15,7 +15,7 @@ class ChatInteractor: ChatInteractorProtocol {
     
     // MARK: - Properties
     
-    var presenter: ChatPresenterProtocol!
+    weak var presenter: ChatPresenterProtocol!
 	
 	var messages: [String] = []
 	var imageData: Data?
@@ -42,17 +42,17 @@ class ChatInteractor: ChatInteractorProtocol {
 				model.result.forEach { self.messages.append($0) }
 				
 				if self.isInitialLoading {
-					self.presenter.messagesDidReceived(isScrollToBottom: false)
+					self.presenter?.messagesDidReceived(isScrollToBottom: false)
 				} else {
 					let localMessages = self.userDefaults.object(forKey: "Local Messages") as? [String]
 					localMessages?.forEach { self.messages.insert($0, at: 0) }
-					self.presenter.messagesDidReceived(isScrollToBottom: true)
+					self.presenter?.messagesDidReceived(isScrollToBottom: true)
 					self.isInitialLoading = true
 				}
 			case .failure(let error):
 				print(error.localizedDescription)
 				
-				self.presenter.getError()
+				self.presenter?.getError()
 			}
 		}
 	}
@@ -62,11 +62,11 @@ class ChatInteractor: ChatInteractorProtocol {
 			switch result {
 			case .success(let data):
 				self.imageData = data
-				self.presenter.messagesDidReceived(isScrollToBottom: false)
+				self.presenter?.messagesDidReceived(isScrollToBottom: false)
 			case .failure(let error):
 				print(error.localizedDescription)
 				
-				self.presenter.getError()
+				self.presenter?.getError()
 			}
 		}
 	}

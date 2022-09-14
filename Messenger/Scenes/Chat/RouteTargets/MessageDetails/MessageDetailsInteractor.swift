@@ -11,7 +11,7 @@ class MessageDetailsInteractor: MessageDetailsInteractorProtocol {
     
     // MARK: - Properties
     
-    var presenter: MessageDetailsPresenterProtocol!
+    weak var presenter: MessageDetailsPresenterProtocol!
 	
 	var message: String
 	var imageData: Data?
