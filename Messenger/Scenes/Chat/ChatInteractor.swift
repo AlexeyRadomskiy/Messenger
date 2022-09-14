@@ -37,7 +37,7 @@ class ChatInteractor: ChatInteractorProtocol {
 		chatService.fetchData(with: offset) { result in
 			switch result {
 			case .success(let model):
-				self.offset += 10
+				self.offset += 20
 				model.result.forEach { self.messages.append($0) }
 				
 				DispatchQueue.main.async {
@@ -56,7 +56,7 @@ class ChatInteractor: ChatInteractorProtocol {
 				DispatchQueue.main.async {
 					self.presenter.getError()
 					if self.offset > 20 {
-						self.offset -= 10
+						self.offset -= 20
 					}
 				}
 			}
